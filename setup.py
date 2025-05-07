@@ -17,4 +17,5 @@ setup(
     },
     python_requires=">=3.10",
     author="yanghn2002",
+    url="https://github.com/yanghn2002/mintf",
 )
