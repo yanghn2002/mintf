@@ -4,7 +4,7 @@ from quaternion import \
     from_float_array as quat_from_array,\
     from_rotation_matrix as quat_from_rot,\
     as_rotation_matrix as quat2mat,\
-    as_float_array
+    as_float_array as quat_to_array
 
 
 DTYPE = np.dtype(float)
@@ -134,7 +134,7 @@ matrix:
     def get_mat(self, inv=False) -> np.ndarray: return np.linalg.inv(self.mat) if inv else self.mat.copy()
     def get_trs(self, inv=False) -> np.ndarray: return np.linalg.inv(self.mat) if inv else self.trs.copy()
     def get_rot(self, inv=False) -> np.ndarray: return np.linalg.inv(self.mat) if inv else self.rot.copy()
-    def get_quat(self, inv=False) -> np.ndarray: return as_float_array(quat_from_rot(np.linalg.inv(self.rot) if inv else self.rot))
+    def get_quat(self, inv=False) -> np.ndarray: return quat_to_array(quat_from_rot(np.linalg.inv(self.rot) if inv else self.rot))
     
     def tx(self, tx:float): return self([tx, 0, 0])
     def ty(self, ty:float): return self([0, ty, 0])
