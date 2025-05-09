@@ -105,6 +105,7 @@ class Frame:
         mat = self.mat
         trs = self.trs
         quat = self.get_quat()
+
         return f"""Frame: {self.addr}
 xyz:  {trs[0]}, {trs[1]}, {trs[2]}
 wxyz: {quat[0]}, {quat[1]}, {quat[2]}, {quat[3]}
@@ -122,11 +123,13 @@ matrix:
     def inv(self, *other):
 
         self.mat = np.linalg.inv(self.mat)
+
         return self(*other)
     
-    def set_to(self, *other):
+    def set_to(self, *other, inv:bool=False):
 
-        self.mat = Frame(*other).mat
+        other = Frame(*other).mat
+        self.mat = np.linalg.inv(other.mat) if inv else other.mat
 
         return self
 
